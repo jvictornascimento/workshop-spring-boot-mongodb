@@ -28,8 +28,14 @@ public class UserService {
         }
         return new UserDto(repository.findById(id).get());
     }
-
     public UserDto insert(UserDto dto){
         return new UserDto(repository.save(fromDto(dto)));
+    }
+    public String delete(String id) {
+        if (repository.findById(id).isEmpty()){
+            throw new ObjectNotFoundException("Objeto não encontrado");
+        }
+        repository.deleteById(id);
+        return "Usuario deletado com sucesso!";
     }
 }

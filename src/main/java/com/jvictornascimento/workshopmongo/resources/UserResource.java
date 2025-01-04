@@ -6,6 +6,7 @@ import com.jvictornascimento.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,5 +29,9 @@ public class UserResource {
     @PostMapping
     public ResponseEntity<UserDto> insert(@RequestBody UserDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.insert(dto));
+    }
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.delete(id));
     }
 }
