@@ -1,5 +1,6 @@
 package com.jvictornascimento.workshopmongo.resources;
 
+import com.jvictornascimento.workshopmongo.domain.Post;
 import com.jvictornascimento.workshopmongo.dto.UserDto;
 import com.jvictornascimento.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class UserResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
+    }@GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findPosts(id));
     }
     @PostMapping
     public ResponseEntity<UserDto> insert(@RequestBody UserDto dto){

@@ -1,5 +1,6 @@
 package com.jvictornascimento.workshopmongo.services;
 
+import com.jvictornascimento.workshopmongo.domain.Post;
 import com.jvictornascimento.workshopmongo.domain.User;
 import com.jvictornascimento.workshopmongo.dto.UserDto;
 import com.jvictornascimento.workshopmongo.repositories.UserRepository;
@@ -48,5 +49,11 @@ public class UserService {
 
 
         return new UserDto(repository.save(data));
+    }
+    public List<Post> findPosts(String id) {
+        if (repository.findById(id).isEmpty()){
+            throw new ObjectNotFoundException("Objeto não encontrado");
+        }
+        return repository.findById(id).get().getPosts();
     }
 }
