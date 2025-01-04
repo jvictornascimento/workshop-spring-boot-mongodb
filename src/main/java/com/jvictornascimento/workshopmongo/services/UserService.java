@@ -38,4 +38,15 @@ public class UserService {
         repository.deleteById(id);
         return "Usuario deletado com sucesso!";
     }
+    public  UserDto update(String id, UserDto dto){
+        if (repository.findById(id).isEmpty()){
+            throw new ObjectNotFoundException("Objeto não encontrado");
+        }
+        User data = repository.findById(id).get();
+        data.setEmail(dto.getEmail() != null && !dto.getEmail().isEmpty() ? dto.getEmail() : data.getEmail());
+        data.setName(dto.getName() != null && !dto.getName().isEmpty() ? dto.getName() : data.getName());
+
+
+        return new UserDto(repository.save(data));
+    }
 }
