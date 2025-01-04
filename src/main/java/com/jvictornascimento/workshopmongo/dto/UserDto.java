@@ -1,7 +1,6 @@
 package com.jvictornascimento.workshopmongo.dto;
 
 import com.jvictornascimento.workshopmongo.domain.User;
-import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 
