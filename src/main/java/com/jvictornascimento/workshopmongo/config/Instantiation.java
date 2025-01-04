@@ -3,7 +3,7 @@ package com.jvictornascimento.workshopmongo.config;
 import com.jvictornascimento.workshopmongo.domain.User;
 import com.jvictornascimento.workshopmongo.domain.Post;
 import com.jvictornascimento.workshopmongo.dto.AuthorDto;
-import com.jvictornascimento.workshopmongo.dto.UserDto;
+import com.jvictornascimento.workshopmongo.dto.CommentDto;
 import com.jvictornascimento.workshopmongo.repositories.PostRepository;
 import com.jvictornascimento.workshopmongo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null, sdf.parse("21/03/2018"),"Partiu Viagem","Vou viajar para São Paulo. Abraços!",new AuthorDto(maria));
         Post post2 = new Post(null, sdf.parse("23/03/2018"),"Bom dia ","Acordei feliz hoje!",new AuthorDto(maria));
+
+        CommentDto c1 = new CommentDto("Boa Viagem mano!", sdf.parse("21/03/2018"),new AuthorDto(antonio));
+        CommentDto c2 = new CommentDto("Aproveite", sdf.parse("22/03/2018"),new AuthorDto(jose));
+        CommentDto c3 = new CommentDto("Tenha um otimo dia!", sdf.parse("23/03/2018"),new AuthorDto(antonio));
+
+        post1.setComments(Arrays.asList(c1,c3));
+        post2.setComments(Arrays.asList(c2));
 
         postRepository.saveAll(Arrays.asList(post2,post1));
 
