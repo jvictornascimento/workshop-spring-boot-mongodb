@@ -7,6 +7,7 @@ import com.jvictornascimento.workshopmongo.services.exceptions.ObjectNotFoundExc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.jvictornascimento.workshopmongo.resources.utils.URL.decodeParam;
@@ -25,10 +26,16 @@ public class PostService {
         text = URL.decodeParam(text);
 
         if(repository.findByTitleContainingIgnoreCase(text).isEmpty()){
-            System.out.println(text);
             throw new ObjectNotFoundException("Lista não encontrado");
         }
         return repository.searchTitle(text);
+    }
+    public List<Post> fullSearch(String text, String minDate, String maxDate){
+        text = URL.decodeParam(text);
+        Date min = URL.convertDate(minDate, new Date(0L));
+        Date max = URL.convertDate(maxDate, new Date());
+        max = new Date(max.getTime() + 24 * 60 * 60 * 1000);
+        return repository.fullSearch(text,min,max);
     }
 
 }
