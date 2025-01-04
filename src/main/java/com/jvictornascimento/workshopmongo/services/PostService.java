@@ -28,7 +28,7 @@ public class PostService {
             System.out.println(text);
             throw new ObjectNotFoundException("Lista não encontrado");
         }
-        return repository.findByTitleContainingIgnoreCase(text);
+        return repository.searchTitle(text);
     }
 
 }
