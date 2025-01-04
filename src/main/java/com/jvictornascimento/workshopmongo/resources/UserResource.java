@@ -1,6 +1,7 @@
 package com.jvictornascimento.workshopmongo.resources;
 
 import com.jvictornascimento.workshopmongo.domain.User;
+import com.jvictornascimento.workshopmongo.dto.UserDto;
 import com.jvictornascimento.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserResource {
     @Autowired
     private UserService service;
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 }
