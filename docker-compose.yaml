@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db-mongo:
+    image: 'mongo:latest'
+    container_name: 'db-mongo'
+    ports:
+      - "27017:27017"
+    networks:
+      - minha-rede
+
+  api:
+    image: 'victojoao/workshopmongo:1.0'
+    container_name: 'workshop-mongo'
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://db-mongo:27017/workshop
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db-mongo
+    networks:
+      - minha-rede
+
+networks:
+  minha-rede:
+    driver: bridge
